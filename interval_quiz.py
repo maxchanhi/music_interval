@@ -1,6 +1,6 @@
 import streamlit as st
 from generation import *
-from element import user_quality, user_interval
+from element import user_quality, user_interval, fun_emoji_list
 from streamlit_extras.let_it_rain import rain
 
 def main():
