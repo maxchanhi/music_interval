@@ -26,6 +26,7 @@ def main():
             feedback = 'Error: No current answer available. Please try a new question.'
         elif user_ans.lower() == current_answer.lower():
             feedback = 'Correct!'
+            fun_emoji = random.choice(fun_emoji_list)
             rain(emoji = fun_emoji,animation_length="5")
             st.session_state['new_quest'] = True
         else:
