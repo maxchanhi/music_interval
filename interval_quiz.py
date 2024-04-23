@@ -40,7 +40,7 @@ def main():
 
     col1, col2 = st.columns(2)
     if st.session_state['pic']==True:
-        image_path = f"/Users/chakhangchan/Documents/VS_code/Music_theory_app/interval/flask_wclef/static/images/cropped_score_ans.png"
+        image_path = "static/images/cropped_score_ans.png"
         st.image(image_path, use_column_width=True)
 
     col1, col2, col3 = st.columns(3)
