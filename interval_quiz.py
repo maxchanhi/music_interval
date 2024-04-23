@@ -1,6 +1,7 @@
 import streamlit as st
 from generation import *
 from element import user_quality, user_interval
+from streamlit_extras.let_it_rain import rain
 
 def main():
     st.set_page_config(page_title="Music Note App")
@@ -25,6 +26,7 @@ def main():
             feedback = 'Error: No current answer available. Please try a new question.'
         elif user_ans.lower() == current_answer.lower():
             feedback = 'Correct!'
+            rain(emoji = fun_emoji,animation_length="5")
             st.session_state['new_quest'] = True
         else:
             feedback = f'Incorrect. The answer should be {current_answer}'
