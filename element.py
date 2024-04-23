@@ -103,7 +103,22 @@ def calculate_semitone(first_note, second_note,note_letter1,note_letter2,octave1
     elif NOTE_TO_SEMITONES_LILYPOND[second_note]<NOTE_TO_SEMITONES_LILYPOND[first_note]:
         return NOTE_TO_SEMITONES_LILYPOND[second_note]+13-NOTE_TO_SEMITONES_LILYPOND[first_note]
 
-
+fun_emoji_list = [
+    "😂",  # Face with Tears of Joy
+    "🎉",  # Party Popper
+    "🚀",  # Rocket
+    "🐱",  # Cat Face
+    "🐶",  # Dog Face
+    "🦄",  # Unicorn
+    "🎶",  # Musical Notes
+    "😱","👼🏻","💃🏻","🐰","🐒","🐣","🦀","💥","✨","🥳",
+    "🍦",  # Soft Ice Cream
+    "🌟",  # Glowing Star
+    "👻",  # Ghost
+    "🎈",  # Balloon
+    "🎮",  # Video Game
+    "💩"
+]
 
 """def clef_range(clef):
     if clef=="treble":
