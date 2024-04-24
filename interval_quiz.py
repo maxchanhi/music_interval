@@ -14,16 +14,16 @@ if 'selected_acci' not in st.session_state:
     st.session_state['selected_clef'] = ["Natural (♮)"]
 #if 'compound_octave' not
 
-def new_question(selected_clef,selected_acci):
+def new_question(selected_clef,selected_acci,compound_o):
     difficulty = st.session_state.get('difficulty', 0)
-    if selected_clef and selected_acci:
-        ans, clef, clef2, fix_octave1, fix_octave2, note, note2 = score_generation(selected_clef,selected_acci,level=difficulty)
-        lilypond_generation(clef, clef2, fix_octave1, fix_octave2, note, note2)
-        st.session_state['current_answer'] = ans
-        st.session_state['feedback'] = ""
-        st.session_state['pic'] = True
-    else:
-        st.warning("Please select a clef and a accidental.")
+    
+    ans, clef, clef2, fix_octave1, fix_octave2, note, note2 = score_generation(selected_clef,selected_acci,compound_o,level=difficulty)
+    lilypond_generation(clef, clef2, fix_octave1, fix_octave2, note, note2)
+    st.session_state['current_answer'] = ans
+    st.session_state['feedback'] = ""
+    st.session_state['pic'] = True
+
+    
 
 def check_answer():
     user_ans = f"{st.session_state['user_quality']} {st.session_state['user_interval']}"
@@ -42,12 +42,22 @@ def check_answer():
     st.session_state['feedback'] = feedback
 def main():
     st.title("Music Note App")
-    
-    st.session_state['selected_clef']=st.multiselect("Select clef:", ["treble", "bass", "alto", "tenor"],default="treble")
-    st.session_state['selected_acci']=st.multiselect("Select clef:", advance_accidentals,default="Natural (♮)")
-    compound = st.session_state.get('compound_octave', False)
-    st.checkbox("Compound Octave", key='compound_octave')
     col1, col2 = st.columns(2)
+    with col1:
+        st.session_state['selected_clef']=st.multiselect("Select clef:", ["treble", "bass", "alto", "tenor"],default="treble")
+    with col2:
+        st.session_state['selected_acci']=st.multiselect("Select accidental:", advance_accidentals,default="Natural (♮)")
+    if not st.session_state['selected_clef'] or not st.session_state['selected_acci']:
+        st.warning("Please select a clef and a accidental.")
+    
+    st.checkbox("Compound Octave", key='compound_octave')
+    compound = st.session_state.get('compound_octave', False)
+    
+    if st.button("New Question") and st.session_state['selected_clef'] and st.session_state['selected_acci']:
+        st.session_state['pic']=False
+        new_question(st.session_state['selected_clef'],st.session_state['selected_acci'],compound)
+        st.rerun()
+
     if st.session_state['pic']==True:
         image_path = "static/images/cropped_score_ans.png"
         st.image(image_path, use_column_width=True)
@@ -63,13 +73,10 @@ def main():
     with col3:
         if st.button("Check Answer") and Qualityans != "--"and Intervalans!= "--":
             check_answer()
-            if st.session_state.get('feedback'):
+            if st.session_state.get('feedback',None):
                 st.write(st.session_state['feedback'])
 
-    if st.button("New Question"):
-        st.session_state['pic']=False
-        new_question(st.session_state['selected_clef'],st.session_state['selected_acci'])
-        st.rerun()
+    
 
 if __name__ == '__main__':
     main()

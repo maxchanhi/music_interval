@@ -11,12 +11,16 @@ def clef_range(clef):
         fix_octave = str(random.choice(["c,","c"]))
     return fix_octave
     
-def score_generation(selected_clef=["treble"],accidental=basic_accidentals,level=0):
-    while True:  # This loop will keep running until a valid answer is found
+def score_generation(selected_clef=["treble"],accidental=basic_accidentals,compund_octave=False,level=0):
+    while True: 
         clef1 = random.choice(selected_clef)
         clef2 = clef1
+        if compund_octave:
+            clef2 = random.choice(selected_clef)
         fix_octave1 = clef_range(clef1)
-        fix_octave2 = fix_octave1 
+        fix_octave2 = fix_octave1
+        if compund_octave:
+            fix_octave2 = clef_range(clef2)
         output_note = [random.choice(note_letters), random.choice(accidental), fix_octave1]
         output_note2 = [random.choice(note_letters), random.choice(accidental), fix_octave2]
 
