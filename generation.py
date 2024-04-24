@@ -11,39 +11,14 @@ def clef_range(clef):
         fix_octave = str(random.choice(["c,","c"]))
     return fix_octave
     
-def score_generation(level):
+def score_generation(selected_clef=["treble"],accidental=basic_accidentals,level=0):
     while True:  # This loop will keep running until a valid answer is found
-        clef1 = random.choice(["treble", "bass"])
-        clef2 = random.choice(["treble", "bass"])
-        if level == 0:
-            clef2 = clef1
-            fix_octave1 = clef_range(clef1)
-            fix_octave2 = fix_octave1
-        else:
-            if level ==1:
-                pass
-            elif level ==2:
-                if clef1 == clef2:
-                    continue
-            elif level ==3:
-                clef1 = random.choice(["tenor","alto"])
-                clef2 = random.choice(["tenor","alto"])
-            elif level >=4:
-                clef1 = random.choice(["treble", "bass","tenor","alto"])
-                clef2 = random.choice(["treble", "bass","tenor","alto"])
-                
-            fix_octave1 = clef_range(clef1)
-            fix_octave2 = clef_range(clef2)
-
-        if level == 0:
-            accidentals = [basic_accidentals[1]]
-        elif level >= 1 and level<=4:
-            accidentals = basic_accidentals
-        elif level >= 5:
-            accidentals = advance_accidentals
-
-        output_note = [random.choice(note_letters), random.choice(accidentals), fix_octave1]
-        output_note2 = [random.choice(note_letters), random.choice(accidentals), fix_octave2]
+        clef1 = random.choice(selected_clef)
+        clef2 = clef1
+        fix_octave1 = clef_range(clef1)
+        fix_octave2 = fix_octave1 
+        output_note = [random.choice(note_letters), random.choice(accidental), fix_octave1]
+        output_note2 = [random.choice(note_letters), random.choice(accidental), fix_octave2]
 
         if output_note==output_note2 and random.randint(0, 3) != 0:
             continue
@@ -113,29 +88,36 @@ def lilypond_generation(clef, clef2,fix_octave1,fix_octave2,note,note2):
       # add code to crop 1/10 from the top
       cropped_img = img.crop(crop_rectangle)
       cropped_img.save("static/images/cropped_score_ans.png")
-    
-    
 
-
-"""clef = random.choice(["treble", "bass"])
-        clef2 = random.choice(["treble", "bass"])
-        if lv == 0:
-            clef2 = clef
-            fix_octave1 = clef_range(clef)
+#difficulty = st.selectbox("Choose difficulty:", [
+       # "Beginner", "Intermediate", "Advanced", "C clef Fanfare", "Expert", "Accidental Madness"
+    #], index=st.session_state.get('difficulty', 0))
+    #st.session_state['difficulty'] = ["Beginner", "Intermediate", "Advanced", "C clef Fanfare", "Expert", "Accidental Madness"].index(difficulty)
+def level_difficulty(level):
+    level_dic = {"Beginner":["treble"],}  
+"""if level == 0:
+            clef2 = clef1
+            fix_octave1 = clef_range(clef1)
             fix_octave2 = fix_octave1
-        elif lv ==1:
-            fix_octave1 = clef_range(clef)
-            fix_octave2 = clef_range(clef2)
-            pass
-        elif lv ==2:
-            if clef == clef2:
-                continue
-            fix_octave1 = clef_range(clef)
-            fix_octave2 = clef_range(clef2)
-        elif lv ==3:
-            clef = random.choice(["treble", "bass","tenor","alto"])
-            clef2 = random.choice(["treble", "bass","tenor","alto"])
-            fix_octave1 = clef_range(clef)
+        else:
+            if level ==1:
+                pass
+            elif level ==2:
+                if clef1 == clef2:
+                    continue
+            elif level ==3:
+                clef1 = random.choice(["tenor","alto"])
+                clef2 = random.choice(["tenor","alto"])
+            elif level >=4:
+                clef1 = random.choice(["treble", "bass","tenor","alto"])
+                clef2 = random.choice(["treble", "bass","tenor","alto"])
+                
+            fix_octave1 = clef_range(clef1)
             fix_octave2 = clef_range(clef2)
 
-        """
+        if level == 0:
+            accidentals = [basic_accidentals[1]]
+        elif level >= 1 and level<=4:
+            accidentals = basic_accidentals
+        elif level >= 5:
+            accidentals = advance_accidentals"""
