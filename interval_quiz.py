@@ -12,6 +12,8 @@ if 'selected_acci' not in st.session_state:
     st.session_state['selected_clef'] = ["Natural (♮)"]
 if 'difficulty' not in st.session_state:
     st.session_state['difficulty'] = "Beginner"
+if "picture" not in st.session_state:
+    st.session_state['picture'] = None
 
 
 def new_question(selected_clef,selected_acci,same_clef,compound_o):
@@ -62,10 +64,14 @@ def main():
     
     if st.button("New Question") and st.session_state['selected_clef'] and st.session_state['selected_acci']:
         new_question(st.session_state['selected_clef'],st.session_state['selected_acci'],same_clef,compound_octave)
+        st.session_state['picture'] = True
     
-    image_path = "static/images/cropped_score_ans.png"
-    st.image(image_path, use_column_width=False)
-
+    if st.session_state['picture'] :
+        image_path = "static/images/cropped_score_ans.png"
+        st.image(image_path, use_column_width=False)
+    else:
+        st.warning("Press for a New Question")
+    
     col1, col2, col3 = st.columns(3)
     with col1:
         Qualityans=st.selectbox("Quality", user_quality, key='user_quality')
