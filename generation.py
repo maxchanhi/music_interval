@@ -21,6 +21,8 @@ def score_generation(selected_clef=["treble"],accidental=basic_accidentals,compu
         fix_octave2 = fix_octave1
         if compund_octave:
             fix_octave2 = clef_range(clef2)
+            if fix_octave1 == fix_octave2:
+                continue
         output_note = [random.choice(note_letters), random.choice(accidental), fix_octave1]
         output_note2 = [random.choice(note_letters), random.choice(accidental), fix_octave2]
 
