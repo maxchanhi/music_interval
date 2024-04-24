@@ -116,9 +116,10 @@ fun_emoji_list = [
     "🌟",  # Glowing Star
     "👻",  # Ghost
     "🎈",  # Balloon
-    "🎮",  # Video Game
-    "💩"
+    "🎮",  "💩"
 ]
+
+difficulty_list= ["Beginner", "Intermediate", "Advanced", "C clef Fanfare", "Accidental Fanfare", "Expert"]
 
 """def clef_range(clef):
     if clef=="treble":

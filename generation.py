@@ -99,31 +99,17 @@ def lilypond_generation(clef, clef2,fix_octave1,fix_octave2,note,note2):
        # "Beginner", "Intermediate", "Advanced", "C clef Fanfare", "Expert", "Accidental Madness"
     #], index=st.session_state.get('difficulty', 0))
     #st.session_state['difficulty'] = ["Beginner", "Intermediate", "Advanced", "C clef Fanfare", "Expert", "Accidental Madness"].index(difficulty)
-def level_difficulty(level):
-    level_dic = {"Beginner":["treble"],}  
-"""if level == 0:
-            clef2 = clef1
-            fix_octave1 = clef_range(clef1)
-            fix_octave2 = fix_octave1
-        else:
-            if level ==1:
-                pass
-            elif level ==2:
-                if clef1 == clef2:
-                    continue
-            elif level ==3:
-                clef1 = random.choice(["tenor","alto"])
-                clef2 = random.choice(["tenor","alto"])
-            elif level >=4:
-                clef1 = random.choice(["treble", "bass","tenor","alto"])
-                clef2 = random.choice(["treble", "bass","tenor","alto"])
-                
-            fix_octave1 = clef_range(clef1)
-            fix_octave2 = clef_range(clef2)
+def level_difficulty(level="Beginner"):
+    level_dic = {"Beginner":[["treble","bass"],["same"],['Natural (♮)'],["same_octave"]],
+                 "Intermediate":[["treble","bass"],["same"],basic_accidentals,["same_octave"]],
+                 "Advanced":[["treble","bass"],["different"],basic_accidentals,["compound_interval"]],
+                 "C clef Fanfare":[["tenor","alto"],["same"],basic_accidentals,["same_octave"]],
+                 "Accidental Fanfare":[["treble","bass"],["same"],advance_accidentals,["compound_interval"]],
+                 "Expert":[["treble","alto","tenor","bass"],["different"],advance_accidentals,["compound_interval"]]}
+    selected_level = {"clef" :level_dic[level][0],
+                      "same_clef":level_dic[level][1],
+                      "accidentals":level_dic[level][2],
+                      "octave":level_dic[level][3]}
+    return selected_level
 
-        if level == 0:
-            accidentals = [basic_accidentals[1]]
-        elif level >= 1 and level<=4:
-            accidentals = basic_accidentals
-        elif level >= 5:
-            accidentals = advance_accidentals"""
+   
